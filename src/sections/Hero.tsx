@@ -5,6 +5,13 @@ import StarIcon from '@/assets/icons/star.svg';
 import SparkleIcon from '@/assets/icons/sparkle.svg';
 import Image from 'next/image';
 import HeroOrbit from '@/components/HeroOrbit';
+import {
+  BIG_STARS_LAYER_VALUES,
+  CIRCLES_LAYER_VALUES,
+  SPARKLES_LAYER_VALUES,
+} from '@/helper/HeroConstants';
+import { LAYERS_HERO_RING } from '@/helper/HeroConstants';
+
 export const HeroSection = () => {
   return (
     <section className="py-32 md:py-48 lg:py-60 relative z-0 overflow-x-clip">
@@ -13,75 +20,47 @@ export const HeroSection = () => {
           className="absolute inset-0 -z-30 opacity-5"
           style={{ backgroundImage: `url(${grainImage.src})` }}
         ></div>
-        <div className="size-[620px] hero-ring"></div>
-        <div className="size-[820px] hero-ring"></div>
-        <div className="size-[1020px] hero-ring"></div>
-        <div className="size-[1220px] hero-ring"></div>
-        <HeroOrbit
-          size={800}
-          rotationDegree={-72}
-        >
-          <StarIcon className="size-28 text-emerald-300" />
-        </HeroOrbit>
-        <HeroOrbit
-          size={550}
-          rotationDegree={20}
-        >
-          <StarIcon className="size-12 text-emerald-300" />
-        </HeroOrbit>
+        {LAYERS_HERO_RING.map((size, index) => (
+          <div
+            key={index}
+            className={`size-[${size}px] hero-ring`}
+          ></div>
+        ))}
+        {BIG_STARS_LAYER_VALUES.map((value, index) => (
+          <HeroOrbit
+            key={index}
+            size={value.orbitSize}
+            rotationDegree={value.rotationDegree}
+          >
+            <StarIcon
+              className={`size-${value.elementSize} text-emerald-300`}
+            />
+          </HeroOrbit>
+        ))}
 
-        <HeroOrbit
-          size={590}
-          rotationDegree={98}
-        >
-          <StarIcon className="size-8 text-emerald-300" />
-        </HeroOrbit>
-        {/* Sparkles */}
-        <HeroOrbit
-          size={430}
-          rotationDegree={-14}
-        >
-          <SparkleIcon className="size-8 text-emerald-300/20" />
-        </HeroOrbit>
-        <HeroOrbit
-          size={440}
-          rotationDegree={79}
-        >
-          <SparkleIcon className="size-5 text-emerald-300/20" />
-        </HeroOrbit>
-        <HeroOrbit
-          size={530}
-          rotationDegree={178}
-        >
-          <SparkleIcon className="size-10 text-emerald-300/20" />
-        </HeroOrbit>
-        <HeroOrbit
-          size={710}
-          rotationDegree={144}
-        >
-          <SparkleIcon className="size-14 text-emerald-300/20" />
-        </HeroOrbit>
-        {/* Circles */}
-        <HeroOrbit
-          size={720}
-          rotationDegree={85}
-        >
-          <div className="size-3 bg-emerald-300/20 rounded-full" />
-        </HeroOrbit>
+        {SPARKLES_LAYER_VALUES.map((value, index) => (
+          <HeroOrbit
+            key={index}
+            size={value.orbitSize}
+            rotationDegree={value.rotationDegree}
+          >
+            <SparkleIcon
+              className={`size-${value.elementSize} text-emerald-300/20`}
+            />
+          </HeroOrbit>
+        ))}
 
-        <HeroOrbit
-          size={520}
-          rotationDegree={-41}
-        >
-          <div className="size-2 bg-emerald-300/20 rounded-full" />
-        </HeroOrbit>
-
-        <HeroOrbit
-          size={650}
-          rotationDegree={-5}
-        >
-          <div className="size-2 bg-emerald-300/20 rounded-full" />
-        </HeroOrbit>
+        {CIRCLES_LAYER_VALUES.map((value, index) => (
+          <HeroOrbit
+            key={index}
+            size={value.orbitSize}
+            rotationDegree={value.rotationDegree}
+          >
+            <div
+              className={`size-${value.elementSize} bg-emerald-300/20 rounded-full`}
+            />
+          </HeroOrbit>
+        ))}
       </div>
       <div className="container">
         <div className="flex flex-col items-center">
@@ -113,7 +92,7 @@ export const HeroSection = () => {
             <span className="font-semibold">Explore My Work</span>
             <ArrowDown className="size-4" />
           </button>
-          <button className=" inline-flex items-center gap-2 border border-white bg-white text-gray-900 h-12 px-6 rounded-xl">
+          <button className="inline-flex items-center gap-2 border border-white bg-white text-gray-900 h-12 px-6 rounded-xl">
             <span>👋</span>
             <span className="font-semibold">Let&apos;s Connect</span>
           </button>
